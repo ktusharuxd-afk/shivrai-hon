@@ -674,10 +674,10 @@ uint256 GetOrphanRoot(const CBlock* pblock)
 
 int64 CBlock::GetBlockValue(int64 nFees) const
 {
-    int64 nSubsidy = 50 * COIN;
+    int64 nSubsidy = 200 * COIN;
 
-    // Subsidy is cut in half every 4 years
-    nSubsidy >>= (nBestHeight / 210000);
+    // Subsidy is cut in half every 2 years
+    nSubsidy >>= (nBestHeight / 210240);
 
     return nSubsidy + nFees;
 }
