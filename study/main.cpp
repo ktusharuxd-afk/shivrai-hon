@@ -685,7 +685,7 @@ int64 CBlock::GetBlockValue(int64 nFees) const
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast)
 {
     const unsigned int nTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-    const unsigned int nTargetSpacing = 10 * 60;
+    const unsigned int nTargetSpacing = 5 * 60;
     const unsigned int nInterval = nTargetTimespan / nTargetSpacing;
 
     // Genesis block
@@ -1350,7 +1350,7 @@ string GetAppDir()
     }
     else if (getenv("APPDATA"))
     {
-        strDir = strprintf("%s\\Bitcoin", getenv("APPDATA"));
+        strDir = strprintf("%s\\SHIVRAI-HON", getenv("APPDATA"));
     }
     else if (getenv("USERPROFILE"))
     {
@@ -1361,7 +1361,7 @@ string GetAppDir()
             fMkdirDone = true;
             _mkdir(strAppData.c_str());
         }
-        strDir = strprintf("%s\\Bitcoin", strAppData.c_str());
+        strDir = strprintf("%s\\SHIVRAI-HON", strAppData.c_str());
     }
     else
     {
@@ -2132,7 +2132,7 @@ bool SendMessages(CNode* pto)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// BitcoinMiner
+// ShivraiHonMiner
 //
 
 int FormatHashBlocks(void* pbuffer, unsigned int len)
@@ -2180,9 +2180,9 @@ void BlockSHA256(const void* pin, unsigned int nBlocks, void* pout)
 }
 
 
-bool BitcoinMiner()
+bool ShivraiHonMiner()
 {
-    printf("BitcoinMiner started\n");
+    printf("ShivraiHonMiner started\n");
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_LOWEST);
 
     CKey key;
@@ -2265,7 +2265,7 @@ bool BitcoinMiner()
         }
         pblock->nBits = nBits;
         pblock->vtx[0].vout[0].nValue = pblock->GetBlockValue(nFees);
-        printf("\n\nRunning BitcoinMiner with %d transactions in block\n", pblock->vtx.size());
+        printf("\n\nRunning ShivraiHonMiner with %d transactions in block\n", pblock->vtx.size());
 
 
         //
@@ -2318,7 +2318,7 @@ bool BitcoinMiner()
                 assert(hash == pblock->GetHash());
 
                     //// debug print
-                    printf("BitcoinMiner:\n");
+                    printf("ShivraiHonMiner:\n");
                     printf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex().c_str(), hashTarget.GetHex().c_str());
                     pblock->print();
 
@@ -2332,7 +2332,7 @@ bool BitcoinMiner()
 
                     // Process this block the same as if we had received it from another node
                     if (!ProcessBlock(NULL, pblock.release()))
-                        printf("ERROR in BitcoinMiner, ProcessBlock, block not accepted\n");
+                        printf("ERROR in ShivraiHonMiner, ProcessBlock, block not accepted\n");
                 }
                 SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_LOWEST);
 
