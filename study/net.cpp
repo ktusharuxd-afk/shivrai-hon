@@ -19,7 +19,7 @@ void ThreadOpenConnections2(void* parg);
 //
 bool fClient = false;
 uint64 nLocalServices = (fClient ? 0 : NODE_NETWORK);
-CAddress addrLocalHost(0, DEFAULT_PORT, nLocalServices);
+CAddress addrLocalHost(0, 8444, nLocalServices);
 CNode nodeLocalHost(INVALID_SOCKET, CAddress("127.0.0.1", nLocalServices));
 CNode* pnodeLocalHost = &nodeLocalHost;
 bool fShutdown = false;
@@ -908,7 +908,7 @@ bool StartNode(string& strError)
         return false;
     }
     addrLocalHost = CAddress(*(long*)(pHostEnt->h_addr_list[0]),
-                             DEFAULT_PORT,
+                             8444,
                              nLocalServices);
     printf("addrLocalHost = %s\n", addrLocalHost.ToString().c_str());
 
